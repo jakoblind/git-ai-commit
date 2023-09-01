@@ -16,14 +16,14 @@ def get_git_diff():
     """
     Get the diff of the files that were changed.
     """
-    return subprocess.getoutput('git diff HEAD')
+    return subprocess.getoutput('git diff --cached')
 
 
 def get_changed_files():
     """
     Get the list of files that were changed.
     """
-    return subprocess.getoutput('git diff --name-only HEAD').split('\n')
+    return subprocess.getoutput('git diff --name-only --cached').split('\n')
 
 
 def generate_commit_message():
@@ -48,9 +48,6 @@ def generate_commit_message():
         "model": "gpt-4",
         "max_tokens": 20
     }
-
-    # Constructing the prompt for better context
-    prompt = f"Given that the changed files are {', '.join(changed_files)} and the changes are:\n{diff}\nGenerate a commit message for these changes:"
 
     response = requests.post(
         OPENAI_API_ENDPOINT, headers=HEADERS, data=json.dumps(payload))
