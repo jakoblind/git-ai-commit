@@ -1,0 +1,8 @@
+#!/bin/sh
+COMMIT_MSG_FILE=$1
+
+# Call your Python script to get the commit message
+GENERATED_MSG=$(python3 /path/to/chatgpt_commit.py)
+
+# Write the generated commit message to the commit file
+echo "$GENERATED_MSG" > $COMMIT_MSG_FILE
